@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="canonical" href="https://mdbootstrap.com/javascript/charts/" />
+   
+<link rel='stylesheet' id='wsl-widget-css'  href='css/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='compiled.css-css'  href='css/compiled-4.5.8.min.css' type='text/css' media='all' />
+<script src="js/jquery.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/JSHackthon.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <script>
+        
+        function plot(n){
+           
+            if(n ==1){
+            
+                var ar = [[],[]];
+         var ar1 = [[],[]];
+
+                var Voltility1= $("#Vol1").val();   
+                var spot1= $("#Strike1").val();
+                var final1= $("#final1").val();
+
+                 var Voltility= $("#Vol").val();
+                var spot= $("#Strike").val();
+                var final= $("#final").val();
+
+                 $("#sv1").text(Voltility);
+                $("#ss1").text(spot);
+                $("#sf1").text(final);
+                $("#sv2").text(Voltility1);
+                $("#ss2").text(spot1);
+                $("#sf2").text(final1);
+            
+                  ar = myFunction(Voltility,spot,final);
+
+                 ar1 = myFunction(Voltility1,spot1,final1);
+                 debugger;
+                var x2 =[];
+                var x1 =[];
+                var y1 =[];
+            var y2 =[];
+            for(j=0;j<366;j++)
+             {
+            x1[j] = ar[j][0];
+            y1[j] = ar[j][2];
+             }
+            for(j=0;j<366;j++)
+    {
+        x2[j] = ar1[j][0];
+        y2[j] = ar1[j][2];
+    }
+
+
+        var trace1 = {
+ x: x1,
+ y: y1,
+ mode: 'lines',
+ marker: {
+   color: 'rgb(219, 64, 82)',
+   size: 12
+ },
+ line: {
+   color: 'rgb(128, 0, 128)',
+   width: 1
+ }
+};
+var trace2 = {
+ x: x2,
+ y: y2,
+ mode: 'lines',
+ line: {
+   color: 'rgb(55, 128, 191)',
+   width: 3
+ }
+};
+var data = [trace1,trace2];
+
+}
+            else{
+                var ar = [[],[]];
+
+                var Voltility= $("#Vol").val();
+                var spot= $("#Strike").val();
+                var final= $("#final").val();
+                $("#sv1").text(Voltility);
+                $("#ss1").text(spot);
+                $("#sf1").text(final);
+
+            
+                  var  ar = myFunction(Voltility,spot,final);
+            var x1 =[];
+            var y1 =[];
+            for(j=0;j<366;j++)
+             {
+            x1[j] = ar[j][0];
+            y1[j] = ar[j][2];
+             }
+             var trace1 = {
+ x: x1,
+ y: y1,
+ mode: 'lines',
+ marker: {
+   color: 'rgb(219, 64, 82)',
+   size: 12
+ },
+ line: {
+   color: 'rgb(128, 0, 128)',
+   width: 1
+ }
+};
+var data = [trace1];
+}
+
+
+
+
+
+var layout = {
+ title: 'Geometric Brownian Motion'
+};
+
+Plotly.newPlot('myDiv', data, layout);
+
+$("#finiqintro").hide();
+$("#ratein").slideDown();
+}
+
+function fillstock(stockname){
+ 
+var apple={
+          Vol:14,
+          spot:230,
+          tar:260
+          }
+  var amazon={
+  Vol:15,
+  spot:1684,
+  tar:1710
+  }
+  var google={
+  Vol:18,
+  spot:1180,
+  tar:1220
+  }
+
+  if(stockname == "ap"){
+    $("#CurrentStock").text("Apple");
+   $("#Vol").val(apple.Vol);
+   $("#Strike").val(apple.spot);
+ $("#final").val(apple.tar);
+ 
+  
+  }else if(stockname == "am"){
+    $("#CurrentStock").text("Amazon");
+    $("#Vol").val(amazon.Vol);
+   $("#Strike").val(amazon.spot);
+ $("#final").val(amazon.tar);
+
+  }else if(stockname == "go"){
+    $("#CurrentStock").text("Google");
+    $("#Vol").val(google.Vol);
+   $("#Strike").val(google.spot);
+ $("#final").val(google.tar);
+
+  }
+
+}
+
+       </script>
+   
+
+                <div class="row" style="margin-top:50px;">
+                        
+                    <div class="col-md-3">
+                        <div class="card" id="finiqintro" style="width: 20rem;margin-left: 95PX;">
+
+                                <!-- Card image -->
+                                <img class="card-img-top" src="finiq.png" alt="Card image cap">
+                  
+                                <!-- Card content -->
+                                <div class="card-body">
+                  
+                                  <!-- Title -->
+                                  <h4 class="card-title"><a>Ashutosh Avadhani</a></h4>
+                                  <!-- Text -->
+                                  <p class="card-text">Example displaying the workings of Geometric Brownian Motion</p>
+                                  <!-- Button -->
+                                  <a href="http://www.finiq.com.sg/" class="btn btn-primary waves-effect waves-light">Visit US</a>
+                  
+                                </div>
+                  
+                              </div>
+                              <div class="card" id="ratein" style="width: 20rem;height: 30rem;margin-left: 95PX;display: none;">
+                                    <div class="col-md-12" style="margin-top: 40PX;">
+                                        <h2>Scenarios</h2>
+                                    <!-- <div class="md-form ">
+                  
+                                            <input type="text" style='margin-top: 10px' id="Vol" class="form-control">
+                                            <label for="defaultForm-email" class="">Growth Percent</label> 
+                                            
+                                    </div> -->
+                                    <div class="md-form ">
+              
+                                            <input type="text" id="Vol1" class="form-control">
+                                            <label for="defaultForm-email" class="">Volatility</label> 
+                                            <!-- <div class="text-left" id="errorpassreg" style="font-size: 10px;color:red; display: none;">* Password cant Be Empty</div>     -->
+                                    </div>
+                                    <div class="md-form ">
+              
+                                            <input type="text" id="Strike1" class="form-control">
+                                            <label for="defaultForm-email" class="">Spot Price</label> 
+                                            <!-- <div class="text-left" id="errorpassreg" style="font-size: 10px;color:red; display: none;">* Password cant Be Empty</div>     -->
+                                    </div>
+                                    <div class="md-form ">
+              
+                                            <input type="text" id="final1" class="form-control">
+                                            <label for="defaultForm-email" class="">Target Price</label> 
+                                            <!-- <div class="text-left" id="errorpassreg" style="font-size: 10px;color:red; display: none;">* Password cant Be Empty</div>     -->
+                                    </div>
+                  <p id="norminv"></p> 
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-primary blue-text" onclick="plot(1);">Add Scenerio</button>
+                      <button type="button" class="btn btn-primary blue-text" onclick="plot(2);">Re-Generate</button>
+                     
+                  </div>
+                                    <!-- <a  id="addscen" class="btn btn-primary blue-text" style="margin-top:100px;" onclick="plot(1);">Add Scenerio</a>
+                                    <a  id="addscen" class="btn btn-primary blue-text" style="margin-top:100px;" onclick="plot(1);">Add Scenerio</a> -->
+									<!-- <button onclick="getElementById('norminv').innerHTML = normInv(0.689426295, 0, 1)" class="btn btn-primary blue-text" style="margin-top:100px;">Calculate Norm Inverse</a> -->
+                                </div>
+                                  </div>
+                            </div>
+                            
+                    <div class="col-md-9"  >
+
+                    <div class="flex-column">
+                        <div class="card-wrapper " style="width: 75rem;height: 50rem;">
+                            <div id="card-1" class="card-rotating effect__click text-center  h-100 w-100">
+              
+                              <!-- Front Side -->
+                              <div class="face back">
+                                <div id="myDiv" class="view overlay example hoverable" style="height:550px;">
+                                       
+                                  </div>
+                                <div class="card-body">
+                                  <div>
+                                    <h3><label id="CurrentStock"></label></h3>
+                                  </div>
+                                        <table class="table">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">S.No</th>
+                                                    <th scope="col">Volatility</th>
+                                                    <th scope="col">Spot Price</th>
+                                                    <th scope="col">Target Price</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr>
+                                                    <th scope="row">1</th>
+                                                    <td><label id="sv1"></label></td>
+                                                    <td><label id="ss1"></label></td>
+                                                    <td><label id="sf1"></label></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <th scope="row">2</th>
+                                                    <td><label id="sv2"></label></td>
+                                                    <td><label id="ss2"></label></td>
+                                                    <td><label id="sf2"></label></td>
+                                                  </tr>
+                                                  
+                                                </tbody>
+                                              </table>
+
+                                </div>
+                              </div>
+                              <!-- Front Side -->
+              
+                              <!-- Back Side -->
+                              <div class="face front">
+                                <div class="card-body ">
+                                        <h1 style="margin-top:50px;"><strong>Geometric Brownian Motion</strong></h1>
+                                           <div class="col-md-12 d-flex  " style="margin-top:100px;">
+                                            <div class="col-md-3"></div>
+                                            <div class="col-md-6" style="position:relative;"> 
+                                                <div class="md-form ">
+                                            <h3>Select Stock</h3>  </div>
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button type="button" class="btn btn-primary" onclick="fillstock('ap');">apple</button>
+                                                    <button type="button" class="btn btn-primary" onclick="fillstock('am');">amazon</button>
+                                                    <button type="button" class="btn btn-primary" onclick="fillstock('go');">Google</button>
+                                                </div>
+                                              
+                                              <!-- 
+                                                
+                                               -->
+                                        <div class="md-form ">
+                  
+                                                <input type="text" id="Vol" class="form-control">
+                                                <label for="defaultForm-email" class="">Volatility %</label> 
+                                                <!-- <div class="text-left" id="errorpassreg" style="font-size: 10px;color:red; display: none;">* Password cant Be Empty</div>     -->
+                                        </div>
+                                        <div class="md-form ">
+                  
+                                                <input type="text" id="Strike" class="form-control">
+                                                <label for="defaultForm-email" class="">Spot Price</label> 
+                                                <!-- <div class="text-left" id="errorpassreg" style="font-size: 10px;color:red; display: none;">* Password cant Be Empty</div>     -->
+                                        </div>
+                                        <div class="md-form ">
+                  
+                                                <input type="text" id="final" class="form-control">
+                                                <label for="defaultForm-email" class="">Target Price</label> 
+                                                <!-- <div class="text-left" id="errorpassreg" style="font-size: 10px;color:red; display: none;">* Password cant Be Empty</div>     -->
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                    </div>
+                                        <a href="#" class="btn btn-primary rotate-btn blue-text" data-card="card-1" onclick="plot(2);" style="margin-top:100px;">Generate</a>
+              
+                            </div>
+                          </div>
+            
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="card drop" id="Stockpopup" style="width: 30rem;margin-left: 95PX;display: none">
+
+                  
+                    <img class="card-img-top" src="finiq.png" alt="Card image cap">
+      
+              
+                    <div class="card-body">
+      
+               
+                      <h4 class="card-title"><a>About US</a></h4>
+                
+                      <p class="card-text">Financial Technology for fastest time to market and rapid ROI</p>
+              
+                      <a href="http://www.finiq.com.sg/" class="btn btn-primary waves-effect waves-light">Visit US</a>
+      
+                    </div>
+      
+                  </div> -->
+                
+                
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+
+    
+<script type='text/javascript' src='js/mdb1.js'></script>
+</body>
+
+</html>
